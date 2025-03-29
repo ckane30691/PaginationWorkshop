@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const { getUsers } = require("./controllers/userController");
+const { getUsers, getUsersOffsetBased, getUsersCursorBased } = require("./controllers/userController");
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     .catch((err) => console.error("Could not connect to MongoDB:", err));
 
 // Routes
-app.get("/users", getUsers);
+app.get("/users", getUsersCursorBased);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
