@@ -43,7 +43,8 @@ const getUsersCursorBased = async (req, res) => {
 
     const users = await User.find(query)
         .sort({ createdAt: -1 }) // Newest first
-        .limit(limit);
+        .limit(limit)
+        .lean();
 
     const totalUsers = await User.countDocuments();
 
